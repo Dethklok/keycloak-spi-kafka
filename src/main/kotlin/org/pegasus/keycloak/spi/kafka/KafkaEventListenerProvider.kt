@@ -2,8 +2,8 @@ package org.pegasus.keycloak.spi.kafka
 
 import com.fasterxml.jackson.core.JsonProcessingException
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.sun.org.slf4j.internal.LoggerFactory
 import org.apache.kafka.clients.producer.ProducerRecord
+import org.jboss.logging.Logger
 import org.keycloak.events.Event
 import org.keycloak.events.EventListenerProvider
 import org.keycloak.events.EventType
@@ -19,7 +19,7 @@ class KafkaEventListenerProvider(
     events: Array<String>,
     producerFactory: KafkaProducerFactory
 ) : EventListenerProvider {
-    private val logger = LoggerFactory.getLogger(javaClass)
+    private val logger = Logger.getLogger(javaClass)
     private val mapper = ObjectMapper()
 
     private val events = events.mapNotNull { event ->

@@ -1,9 +1,10 @@
 plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.9.0'
     id 'application'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
 
-group = 'org.example'
+group = 'org.pegasus'
 version = '1.0-SNAPSHOT'
 
 ext {
@@ -16,9 +17,9 @@ repositories {
 }
 
 dependencies {
-    implementation "org.keycloak:keycloak-core:$keycloakVersion"
-    implementation "org.keycloak:keycloak-server-spi:$keycloakVersion"
-    implementation "org.keycloak:keycloak-server-spi-private:$keycloakVersion"
+    compileOnly "org.keycloak:keycloak-core:$keycloakVersion"
+    compileOnly "org.keycloak:keycloak-server-spi:$keycloakVersion"
+    compileOnly "org.keycloak:keycloak-server-spi-private:$keycloakVersion"
     implementation "org.apache.kafka:kafka-clients:$kafkaVersion"
     implementation "org.jboss.logging:jboss-logging:3.5.3.Final"
     testImplementation 'org.jetbrains.kotlin:kotlin-test'
@@ -34,4 +35,10 @@ kotlin {
 
 application {
     mainClassName = 'MainKt'
+}
+
+shadowJar {
+    archiveBaseName.set('keycloak-spi-kafka')
+    archiveClassifier.set('')
+    archiveVersion.set('')
 }
